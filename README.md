@@ -1,14 +1,14 @@
-i# OZ Utility Image
+# ubuntu-cli-toolbox
 
 This image is based on Ubuntu 24.04 and bundles a set of handy CLI tools for text, data, media, and filesystem operations.
 
 ## Installed tools
 
-- **ImageMagick (`magick`,    `convert`)**: Image processing (convert, resize, composite, identify).
-- **FFmpeg (`ffmpeg`,    `ffprobe`)**: Audio/video transcoding and probing.
+- **ImageMagick (`magick`,      `convert`)**: Image processing (convert, resize, composite, identify).
+- **FFmpeg (`ffmpeg`,      `ffprobe`)**: Audio/video transcoding and probing.
 - **Pandoc (`pandoc`)**: Universal document converter.
 - **du**: Disk usage reporting (from coreutils).
-- **inotify-tools (`inotifywait`,    `inotifywatch`)**: Filesystem event monitoring.
+- **inotify-tools (`inotifywait`,      `inotifywatch`)**: Filesystem event monitoring.
 - **file (`file`)**: File type identification.
 - **p7zip-full (`7z`)**: 7-Zip archiver (compress/decompress).
 - **unrar (`unrar`)**: Extract RAR archives.
@@ -47,9 +47,9 @@ Some Debian/Ubuntu packages ship binaries under different names. Convenience sym
 ## Quick checks
 
 - Print versions:
-  - `magick -version`,    `ffmpeg -version`,    `pandoc --version`,    `jq --version`,    `yq --version`,    `rg --version`,    `ag --version`,    `fzf --version`,    `bat --version`,    `fd --version`,    `eza --version`.
+  - `magick -version`,      `ffmpeg -version`,      `pandoc --version`,      `jq --version`,      `yq --version`,      `rg --version`,      `ag --version`,      `fzf --version`,      `bat --version`,      `fd --version`,      `eza --version`.
 - Verify Python apps:
-  - `python3 --version`,    `pipx --version`,    `markitdown --help`.
+  - `python3 --version`,      `pipx --version`,      `markitdown --help`.
 
 ## Notes
 
