@@ -1,5 +1,8 @@
 FROM ubuntu:24.04
 
+# Ensure local tool installs are available on PATH
+ENV PATH="/root/.local/bin:${PATH}"
+
 # Install CLI tools and Python environment
 RUN set -eux; \
     arch="$(dpkg --print-architecture)"; \
@@ -32,3 +35,10 @@ RUN set -eux; \
     # Cleanup
     rm -rf /var/lib/apt/lists/*
 
+
+# Install uv & playwright & aider-chat
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh && \
+  /root/.local/bin/uv tool install playwright && \
+  /root/.local/bin/playwright install --with-deps chromium && \
+  /root/.local/bin/uv tool install --force --python python3.12 --with pip aider-chat@latest && \
+  rm -rf /var/lib/apt/lists/*
