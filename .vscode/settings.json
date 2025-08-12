@@ -10,15 +10,19 @@
     "inotify",
     "inotifywait",
     "inotifywatch",
+    "LZMA",
     "magick",
     "markitdown",
     "mikefarah",
+    "moreutils",
     "noninteractive",
     "pandoc",
+    "pipefail",
     "pipx",
     "rclone",
     "silversearcher",
     "unar",
-    "unrar"
+    "unrar",
+    "vidir"
   ]
 }

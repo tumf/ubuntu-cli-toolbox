@@ -11,7 +11,7 @@ RUN set -eux; \
       # Requested tools
       imagemagick ffmpeg pandoc inotify-tools file p7zip-full unrar \
       parallel rename rclone rsync tree eza jq silversearcher-ag fzf \
-      bat fd-find ripgrep coreutils \
+      bat fd-find ripgrep coreutils moreutils less vim grep sed gawk zip tar xz-utils \
     ; \
     update-ca-certificates; \
     # Install yq (mikefarah) matching CPU arch
