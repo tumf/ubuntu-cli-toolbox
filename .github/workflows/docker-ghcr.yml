@@ -1,4 +1,4 @@
-name: Build and Push Docker image to GCR
+name: Build and Push Docker image to GHCR
 
 on:
   push:
@@ -8,28 +8,30 @@ on:
 
 permissions:
   contents: read
+  packages: write
 
 env:
-  # Mandatory settings (fail-fast if not provided)
-  GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
-  # Defaults
-  GCR_HOST: gcr.io
-  IMAGE_NAME: ${{ github.event.repository.name }}
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build-and-push:
     name: Build and Push
     runs-on: ubuntu-latest
     steps:
-      - name: Validate required variables
+      - name: Validate environment
         run: |
           set -euo pipefail
-          if [ -z "${GCP_PROJECT_ID:-}" ]; then
-            echo "GCP_PROJECT_ID (Repository Variable) is required" >&2
+          if [ -z "${REGISTRY:-}" ]; then
+            echo "REGISTRY is required" >&2
             exit 1
           fi
-          if [ -z "${{ secrets.GCP_SA_KEY }}" ]; then
-            echo "GCP_SA_KEY (Repository Secret) is required" >&2
+          if [ -z "${IMAGE_NAME:-}" ]; then
+            echo "IMAGE_NAME is required" >&2
+            exit 1
+          fi
+          if [ -z "${{ secrets.GITHUB_TOKEN }}" ]; then
+            echo "GITHUB_TOKEN (Repository Secret) is required" >&2
             exit 1
           fi
 
@@ -44,19 +46,19 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            ${{ env.GCR_HOST }}/${{ env.GCP_PROJECT_ID }}/${{ env.IMAGE_NAME }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=ref,event=branch
             type=ref,event=tag
             type=sha
             type=raw,value=latest,enable={{is_default_branch}}
 
-      - name: Login to GCR
+      - name: Log in to GHCR
         uses: docker/login-action@v3
         with:
-          registry: ${{ env.GCR_HOST }}
-          username: _json_key
-          password: ${{ secrets.GCP_SA_KEY }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
         uses: docker/build-push-action@v6
