@@ -21,6 +21,7 @@
     "pipx",
     "rclone",
     "silversearcher",
+    "tesseract",
     "unar",
     "unrar",
     "vidir"

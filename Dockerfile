@@ -14,7 +14,7 @@ RUN set -eux; \
       # Requested tools
       imagemagick ffmpeg pandoc inotify-tools file p7zip-full unrar \
       parallel rename rclone rsync tree eza jq silversearcher-ag fzf \
-      bat fd-find ripgrep coreutils moreutils less vim grep sed gawk zip tar xz-utils \
+      bat fd-find ripgrep coreutils moreutils less vim grep sed gawk zip tar xz-utils tesseract-ocr tesseract-ocr-jpn \
     ; \
     update-ca-certificates; \
     # Install yq (mikefarah) matching CPU arch
@@ -42,3 +42,6 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | sh && \
   /root/.local/bin/playwright install --with-deps chromium && \
   /root/.local/bin/uv tool install --force --python python3.12 --with pip aider-chat@latest && \
   rm -rf /var/lib/apt/lists/*
+
+# Include README in the image
+COPY README.md /README.md
